@@ -286,6 +286,9 @@ Additional features such as Docker support, automatic migrations, database seedi
 
 ![Search & Filtering](Screenshots/Search.PNG)
 
+## Validation Error
+
+![Validation Error](Screenshots/Validation-Error.PNG)
 ---
 
 # Author

@@ -113,7 +113,8 @@
             
                 ,
                 e=>e.Department
-            
+                ,
+                e => e.MobileNumbers
                 );
 
                 var employeesDto = _mapper.Map<List<EmployeeVM>>(employee);
