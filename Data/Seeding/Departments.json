@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "CS",
+    "Description": "Computer Science department."
+  },
+  {
+    "Name": "IT",
+    "Description": "Information Technology department."
+  },
+  {
+    "Name": "AI",
+    "Description": "Artificial Intelligence department."
+  },
+  {
+    "Name": "HR",
+    "Description": "Human Resources department."
+  },
+  {
+    "Name": "Management",
+    "Description": "Management department."
+  }
+]

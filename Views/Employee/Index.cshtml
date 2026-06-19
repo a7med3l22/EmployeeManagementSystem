@@ -1,0 +1,150 @@
+﻿@using AI_Makers_TechAssessment.Models.Dto
+@model IEnumerable<EmployeeVM>
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">
+            Employees Management
+        </h2>
+
+        <a asp-action="AddEmployee" class="btn btn-success">
+            + Add Employee
+        </a>
+    </div>
+
+    <!-- 🔍 SEARCH -->
+    <form asp-action="FilterEmployee" method="get" class="row mb-4 g-2">
+
+        <div class="col-md-5">
+            <input type="text"
+                   name="employeeName"
+                   class="form-control"
+                   placeholder="Search by name..."
+                   value="@ViewBag.SelectedName" />
+        </div>
+
+        <div class="col-md-4">
+            <select name="departmentId" class="form-select">
+                <option value="">All Departments</option>
+
+                @foreach (var dept in ViewBag.Departments)
+                {
+                    <option value="@dept.Id"
+                            selected="@(ViewBag.SelectedDept != null && ViewBag.SelectedDept == dept.Id)">
+                        @dept.Name 
+                    </option>
+                }
+
+            </select>
+        </div>
+
+        <div class="col-md-3 d-flex gap-2">
+
+            <button type="submit" class="btn btn-primary w-50">
+                Search
+            </button>
+
+            <a asp-action="Reset" class="btn btn-secondary w-50">
+                Reset
+            </a>
+
+        </div>
+
+    </form>
+
+    <!-- 👇 EMPLOYEES -->
+    <div class="row">
+
+        @foreach (var employee in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="card employee-card h-100 border-0 shadow">
+
+                    <div class="card-body text-center">
+
+                        <img src="@employee.Photo"
+                             class="employee-image mb-3"
+                             alt="@employee.FullName" />
+
+                        <h4 class="fw-bold">
+                            @employee.FullName
+                        </h4>
+
+                        <span class="badge bg-primary mb-3">
+                            @employee.JobTitle
+                        </span>
+
+                        <div class="text-start">
+
+                            <p>📧 <strong>Email:</strong> @employee.Email</p>
+
+                            <p>
+                                🏢 <strong>Department:</strong>
+                                @employee.DepartmentName 
+                            </p>
+                            <p>
+                                🏢 <strong>DepartmentDescription:</strong>
+                                @employee.DepartmentDescription
+                            </p>
+
+                            <p>
+                                📅 <strong>Hire Date:</strong>
+                                @employee.HireDate.ToString("dd MMM yyyy")
+                            </p>
+
+                            <p>
+                                @(employee.IsActive ? "🟢 Active" : "🔴 Inactive")
+                            </p>
+
+                        </div>
+
+                        <hr />
+
+                        <h6>Mobile Numbers</h6>
+
+                        @if (employee.MobileNumbers?.Any() == true)
+                        {
+                            foreach (var mobile in employee.MobileNumbers)
+                            {
+                                <span class="badge bg-secondary me-1">
+                                    @mobile
+                                </span>
+                            }
+                        }
+
+                    </div>
+
+                    <div class="card-footer bg-white border-0">
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@employee.Id"
+                               class="btn btn-warning">
+                                Edit
+                            </a>
+
+                            <form asp-action="RemoveEmployee" method="post">
+
+                                <input type="hidden" name="EmployeeId" value="@employee.Id" />
+
+                                <button class="btn btn-danger">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

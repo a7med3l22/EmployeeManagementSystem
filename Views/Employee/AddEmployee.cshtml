@@ -1,0 +1,148 @@
+﻿@using AI_Makers_TechAssessment.ViewModels
+@model EmployeeCreateVM
+
+<div class="container py-4">
+    <form asp-action="AddEmployee" method="post" enctype="multipart/form-data">
+
+        <span asp-validation-for="FullName" class="text-danger"></span>
+        <input asp-for="FullName" class="form-control mb-2" placeholder="Full Name" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="Email" class="form-control mb-2" placeholder="Email" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+        <input asp-for="JobTitle" class="form-control mb-2" placeholder="Job Title" />
+
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        <select asp-for="DepartmentId"
+                class="form-control mb-2"
+                asp-items="@(new SelectList(ViewBag.Departments, "Id", "Name"))">
+            <option value="">Select Department</option>
+        </select>
+
+        <div class="mb-2">
+            <input asp-for="IsActive" />
+            <label>Active</label>
+        </div>
+
+        <!-- PHOTO -->
+        <div class="mb-3">
+
+            <span asp-validation-for="PhotoFile" class="text-danger"></span>
+            <input asp-for="PhotoFile"
+                   type="file"
+                   id="photoInput"
+                   accept="image/*"
+                   class="form-control mb-2" />
+            <div id="previewContainer" class="mt-2 hidden">
+
+                <img id="preview" class="img-small" />
+
+                <button type="button"
+                        id="removePhotoBtn"
+                        class="btn btn-sm btn-danger mt-1">
+                    Delete Image
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MOBILE -->
+        <div id="mobilesContainer">
+            @if (Model?.MobileNumbers != null)
+            {
+                for (int i = 0; i < Model.MobileNumbers.Count; i++)
+                {
+                    <div class="mb-2 mobile-row">
+                        <input name="MobileNumbers"
+                               value="@Model.MobileNumbers[i]"
+                               class="form-control d-inline w-75" />
+
+                        <button type="button" class="btn btn-danger btn-sm remove-mobile">
+                            Delete
+                        </button>
+                    </div>
+                }
+            }
+        </div>
+        <span asp-validation-for="MobileNumbers" class="text-danger d-block mt-1"></span>
+        <button type="button" id="addMobileBtn"
+                class="btn btn-sm btn-secondary mb-3">
+            + Add Mobile
+        </button>
+
+        <br />
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+    </form>
+</div>
+
+<script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const container = document.getElementById("mobilesContainer");
+        const addBtn = document.getElementById("addMobileBtn");
+
+        addBtn.addEventListener("click", function () {
+
+            const div = document.createElement("div");
+            div.className = "mb-2 mobile-row";
+
+            div.innerHTML = `
+                <input name="MobileNumbers" class="form-control d-inline w-75" />
+                <button type="button" class="btn btn-danger btn-sm remove-mobile">
+                    Delete
+                </button>
+            `;
+
+            container.appendChild(div);
+        });
+
+        container.addEventListener("click", function (e) {
+            if (e.target.classList.contains("remove-mobile")) {
+                e.target.closest(".mobile-row").remove();
+            }
+        });
+
+    });
+        // PHOTO 
+    const input = document.getElementById("photoInput");
+    const preview = document.getElementById("preview");
+    const previewContainer = document.getElementById("previewContainer");
+    const removeBtn = document.getElementById("removePhotoBtn");
+
+    input.addEventListener("change", function () {
+
+        const file = input.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            alert("Only images allowed");
+            input.value = "";
+            previewContainer.classList.add("hidden");
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            previewContainer.classList.remove("hidden");
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    removeBtn.addEventListener("click", function () {
+
+        input.value = "";
+        preview.src = "";
+        previewContainer.classList.add("hidden");
+
+    });
+</script>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

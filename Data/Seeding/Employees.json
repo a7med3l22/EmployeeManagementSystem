@@ -1,0 +1,65 @@
+﻿[
+  {
+    "FullName": "AhmedAlaa",
+    "Email": "ahmed.alaa@example.com",
+    "JobTitle": "CS-Developer",
+    "HireDate": "2020-01-15",
+    "IsActive": true,
+    "Photo": "images/Employees/Employee1.jpg",
+    "DepartmentId": 1
+  },
+  {
+    "FullName": "EyadMohamed",
+    "Email": "eyad.mohamed@example.com",
+    "JobTitle": "CS-Developer",
+    "HireDate": "2022-04-05",
+    "IsActive": true,
+    "Photo": "images/Employees/Employee2.jpg",
+    "DepartmentId": 1
+  },
+  {
+    "FullName": "MohamedAli",
+    "Email": "mohamed.ali@example.com",
+    "JobTitle": "CS-Developer",
+    "HireDate": "2024-11-15",
+    "IsActive": false,
+    "Photo": "images/Employees/Employee3.jpg",
+    "DepartmentId": 1
+  },
+  {
+    "FullName": "HassanMohamed",
+    "Email": "hassan.mohamed@example.com",
+    "JobTitle": "IT-Developer",
+    "HireDate": "2019-01-15",
+    "IsActive": true,
+    "Photo": "images/Employees/Employee4.jpg",
+    "DepartmentId": 2
+  },
+  {
+    "FullName": "AliAlaa",
+    "Email": "ali.alaa@example.com",
+    "JobTitle": "AI-Developer",
+    "HireDate": "2025-01-15",
+    "IsActive": false,
+    "Photo": "images/Employees/Employee5.jpg",
+    "DepartmentId": 3
+  },
+  {
+    "FullName": "emanAli",
+    "Email": "eman.ali@example.com",
+    "JobTitle": "HR",
+    "HireDate": "2020-01-15",
+    "IsActive": true,
+    "Photo": "images/Employees/Employee6.jpg",
+    "DepartmentId": 4
+  },
+  {
+    "FullName": "SamarSabry",
+    "Email": "samar.sabry@example.com",
+    "JobTitle": "Administrative Employee",
+    "HireDate": "2020-01-15",
+    "IsActive": true,
+    "Photo": "images/Employees/Employee7.jpg",
+    "DepartmentId": 5
+  }
+]
