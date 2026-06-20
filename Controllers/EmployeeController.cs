@@ -24,7 +24,7 @@ namespace AI_Makers_TechAssessment.Controllers
         {
             ViewBag.Departments = await _employeeService.GetAllDepartments();
 
-            return View();
+            return View(); // ملاقنيش حطيت اسم لل فيو ف خد اسم الاكشن وراح ليه اكنه عمل كده  return View("AddEmployee") -- Views ثم Employee ثم AddEmployee.cshtml ف دور هنا ; -- اسمه Convention Based Routing الحركة دي
         }
 
         [HttpPost]

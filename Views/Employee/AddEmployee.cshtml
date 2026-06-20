@@ -79,7 +79,7 @@
 </div>
 
 <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function () { //DOMContentLoaded نفذ الكود بعد تحميل الصفحة بالكامل
 
         const container = document.getElementById("mobilesContainer");
         const addBtn = document.getElementById("addMobileBtn");
@@ -112,7 +112,7 @@
     const previewContainer = document.getElementById("previewContainer");
     const removeBtn = document.getElementById("removePhotoBtn");
 
-    input.addEventListener("change", function () {
+    input.addEventListener("change", function () { //change عند تغيير الملف المختار
 
         const file = input.files[0];
         if (!file) return;
@@ -124,25 +124,32 @@
             return;
         }
 
-        const reader = new FileReader();
+        const reader = new FileReader(); // قراءة الملف محليًا بدون رفعه للسيرفر
 
-        reader.onload = function (e) {
+        reader.onload = function (e) { //بعد انتهاء القراءة.
             preview.src = e.target.result;
             previewContainer.classList.remove("hidden");
         };
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); //تحول الملف إلى URL يمكن عرضه في الصورة
     });
 
     removeBtn.addEventListener("click", function () {
 
         input.value = "";
         preview.src = "";
-        previewContainer.classList.add("hidden");
+        previewContainer.classList.add("hidden"); //إخفاء الـ Preview عند حذف الصورة
 
     });
 </script>
-@section Scripts
+
+@section Scripts 
 {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" /> 
 }
+
+ @*
+إضافة سكربتات التحقق من صحة البيانات 
+ jquery.validate.js ,  jquery.validate.unobtrusive.js 
+علشان تبقي realtime
+*@
