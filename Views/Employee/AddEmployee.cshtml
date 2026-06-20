@@ -6,8 +6,10 @@
 
         <span asp-validation-for="FullName" class="text-danger"></span>
         <input asp-for="FullName" class="form-control mb-2" placeholder="Full Name" />
+       
         <span asp-validation-for="Email" class="text-danger"></span>
         <input asp-for="Email" class="form-control mb-2" placeholder="Email" />
+        
         <span asp-validation-for="JobTitle" class="text-danger"></span>
         <input asp-for="JobTitle" class="form-control mb-2" placeholder="Job Title" />
 
@@ -81,7 +83,7 @@
 <script>
       document.addEventListener("DOMContentLoaded", function () { //DOMContentLoaded نفذ الكود بعد تحميل الصفحة بالكامل
 
-        const container = document.getElementById("mobilesContainer");
+        const container = document.getElementById("mobilesContainer"); // علشان لو نفذنا دي مثلا قبل م استني الصفحة لحد متحمل هتبقي ب null
         const addBtn = document.getElementById("addMobileBtn");
 
         addBtn.addEventListener("click", function () {
@@ -96,12 +98,12 @@
                 </button>
             `;
 
-            container.appendChild(div);
+            container.appendChild(div); // دلوقتي فقط ظهر على الشاشة.
         });
 
-        container.addEventListener("click", function (e) {
+        container.addEventListener("click", function (e) { // الأزرار الجديدة لسه متخلقتش ف عامل ليسنر علي الكونتينر كله
             if (e.target.classList.contains("remove-mobile")) {
-                e.target.closest(".mobile-row").remove();
+                e.target.closest(".mobile-row").remove(); // اطلع ل اقرب اب اسمه mobile-row ثم .remove() فهيحذف السطر كله .
             }
         });
 
@@ -152,4 +154,8 @@
 إضافة سكربتات التحقق من صحة البيانات 
  jquery.validate.js ,  jquery.validate.unobtrusive.js 
 علشان تبقي realtime
+
+Client Side Validation يتم داخل المتصفح باستخدام JavaScript ويعطي تجربة أسرع للمستخدم.
+Server Side Validation يتم داخل الـ Controller باستخدام ModelState وهو الأهم لأنه لا يمكن الاعتماد على المتصفح فقط، لأن المستخدم يستطيع تجاوز JavaScript وإرسال Request مباشرة للسيرفر.
+
 *@

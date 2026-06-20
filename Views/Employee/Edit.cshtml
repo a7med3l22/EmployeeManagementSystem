@@ -8,8 +8,8 @@
 <div class="container py-4">
     <form asp-action="Edit" method="post" enctype="multipart/form-data">
 
-        <input type="hidden" asp-for="Id" />
-
+        <input type="hidden" asp-for="Id" /> 
+        @* المستخدم مش محتاج يشوف الـ Id لكن السيرفر محتاجه *@
        
         <span asp-validation-for="FullName" class="text-danger"></span>
         <input asp-for="FullName" class="form-control mb-2" placeholder="Full Name" />
