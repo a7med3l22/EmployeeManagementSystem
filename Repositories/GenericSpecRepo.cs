@@ -14,7 +14,9 @@ namespace AI_Makers_TechAssessment.Repositories
 
         public async Task<IReadOnlyList<T>> SearchAsync(Expression<Func<T, bool>>? Predicate, params Expression<Func<T, object>>[] funcsSpec)
         {
-            IQueryable<T> query = dbContext.Set<T>().AsNoTracking();
+            // Func يتم تنفيذها في الذاكرة بعد تحميل البيانات.
+            // Expression<Func> فيتم تحويلها إلى SQL بواسطة Entity Framework وتنفيذها داخل قاعدة البيانات.
+            IQueryable<T> query = dbContext.Set<T>().AsNoTracking(); //IQueryable تسمح ببناء Query تدريجيًا قبل تنفيذها
 
             if (Predicate != null)
             {
@@ -24,7 +26,7 @@ namespace AI_Makers_TechAssessment.Repositories
             query = funcsSpec.Aggregate(query, (current, func) => current.Include(func));
 
 
-            return await query.ToListAsync();
+            return await query.ToListAsync(); // التنفيذ يحصل هنا 
         }
 
 

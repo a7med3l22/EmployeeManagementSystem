@@ -1,8 +1,4 @@
-﻿using AI_Makers_TechAssessment.Models.Dto;
-using AI_Makers_TechAssessment.Models.Entities;
-using AI_Makers_TechAssessment.Repositories.Interfaces;
-using AI_Makers_TechAssessment.Services;
-using AI_Makers_TechAssessment.Services.Interfaces;
+﻿using AI_Makers_TechAssessment.Services.Interfaces;
 using AI_Makers_TechAssessment.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

@@ -40,7 +40,7 @@ namespace AI_Makers_TechAssessment //ok
             app.UseStaticFiles(); //السماح بخدمة الملفات الثابتة مثل الصور و CSS و JavaScript مباشرة من wwwroot.
             app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Employee}/{action=}/{id?}")
+        pattern: "{controller=Employee}/{action=Index}/{id?}")
         .WithStaticAssets();
 
             await app.MyOwnApp();

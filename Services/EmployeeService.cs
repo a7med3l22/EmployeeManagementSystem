@@ -9,7 +9,8 @@
 
     namespace AI_Makers_TechAssessment.Services
     {
-        public class EmployeeService : IEmployeeService
+    //لفصل Business Logic عن Controller وتحقيق Separation of Concerns وتحسين قابلية الاختبار والصيانة.
+    public class EmployeeService : IEmployeeService
         {
             private readonly IUnitOfWork _unitOfWork;
             private readonly IMapper _mapper;
@@ -51,7 +52,7 @@
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
-                    await vm.PhotoFile.CopyToAsync(stream);
+                    await vm.PhotoFile.CopyToAsync(stream); //رفع الملفات عملية I/O Bound وبالتالي Async يحسن الأداء
                 }
 
                 emp.Photo = $"images/Employees/{fileName}";
@@ -107,7 +108,7 @@
             {
                 var employeeRepo = _unitOfWork.GetEmployeeRepo();
                 var employee = await employeeRepo.SearchAsync(e =>
-                (string.IsNullOrEmpty(employeeName) || e.FullName.Contains(employeeName)) 
+                (string.IsNullOrEmpty(employeeName) || e.FullName.Contains(employeeName)) // استخدمت contain لتوفير Partial Search بدلاً من البحث المطابق بالكامل.
                 &&
                 (!DepartmentId.HasValue || e.DepartmentId == DepartmentId.Value)
             
@@ -134,7 +135,16 @@
             if (employee == null)
                 throw new Exception("Employee not found");
 
-           
+            var emailExists =
+     await repo.EmailExistsForAnotherEmployee(
+         vm.Email!,
+         id);
+
+            if (emailExists)
+            {
+                throw new Exception("Email already exists");
+            }
+
             employee.FullName = vm.FullName!;
             employee.Email = vm.Email!;
             employee.JobTitle = vm.JobTitle!;

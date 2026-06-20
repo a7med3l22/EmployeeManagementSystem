@@ -29,18 +29,22 @@ namespace AI_Makers_TechAssessment.Repositories
         }
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            return await dbContext.Set<T>().AsNoTracking().ToListAsync();//IReadOnlyList//لمنع تعديل البيانات المرجعة من خارج Repository وإظهار أن النتيجة للقراءة فقط.
+            return await dbContext.Set<T>().AsNoTracking().ToListAsync();
+            //IReadOnlyList//لمنع تعديل البيانات المرجعة من خارج Repository وإظهار أن النتيجة للقراءة فقط.
+            // AsNoTracking بحيث اني لاو عدلت ف حاجة وعملت حفظ ميكونش مراقب التعديلات لاني مش هعدل ف حاجة و ب التالي هحسن الاداء وهقلل استهلاك الذاكرة ف العمليات التي لا تتطلب تعديل البيانات
+            //الـ Request بيستنى النتيجة، لكن الـ Thread بيرجع للـ Thread Pool بدل ما يفضل واقف مستني قاعدة البيانات ترد، وده بيخلي التطبيق يقدر يخدم عدد أكبر من المستخدمين في نفس الوقت.
 
         }
 
-  
+
 
         public async Task<T?> GetByIdAsync(int Id)
         {
             return await dbContext.Set<T>().FindAsync(Id);
+            //يبص جوه Change Tracker ولو موجود يرجعه من غير م يروح يجيبه من قاعدة البيانات ويعمل كويري جديد.
         }
 
-  
+
         public void Update( T entity)
         {
             dbContext.Set<T>().Update(entity);
