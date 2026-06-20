@@ -14,7 +14,7 @@ namespace AI_Makers_TechAssessment.Data.Configurations
 
             builder.HasIndex(d => d.Name)
           .IsUnique()
-          .HasDatabaseName("IX_Departments_Name");
+          .HasDatabaseName("IX_Departments_Name"); //استخدم الاسم ده بالضبط للـ Index.
         }
     }
 }

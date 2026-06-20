@@ -26,7 +26,7 @@ namespace AI_Makers_TechAssessment //ok
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error"); //استخدمت Custom Middleware لأنها تعطيني مرونة أكبر.
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts(); //بيجبر المتصفح يستخدم HTTPS فقط مع الموقع وبيمنع الرجوع لـ HTTP.
             }

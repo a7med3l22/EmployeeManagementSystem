@@ -1,22 +1,12 @@
 ﻿
 using Microsoft.Extensions.Caching.Memory;
-using System.Collections.Concurrent;
-using System.Text.Json;
-using System.Threading;
+
 
 namespace Full_E_Commerce_Project.Handle_MiddleWares
 {
 	public class HandleErrorMiddleWare : IMiddleware
 	{
-		private readonly IWebHostEnvironment environment;
-		private readonly IMemoryCache memoryCache;
-		private readonly TimeSpan _rateLimitWindow = TimeSpan.FromSeconds(30);
-	
-		public HandleErrorMiddleWare(IWebHostEnvironment environment, IMemoryCache memoryCache)
-		{
-			this.environment = environment;
-			this.memoryCache = memoryCache;
-		}
+		
 		public async Task InvokeAsync(HttpContext context, RequestDelegate next)
 		{
 			try
@@ -55,6 +45,7 @@ namespace Full_E_Commerce_Project.Handle_MiddleWares
    "object-src 'none'; " +
    "frame-ancestors 'none'";
 
+            //لو موقعي يرسل ال url كامل ب المعلومات ال شايلها انما لو موقع تاني ميرسلش معاه معلومات زي https://google.com/search?q=employee
             context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
 
 			// HSTS → بيجبر المتصفح يستخدم HTTPS (لو موقعك https)
