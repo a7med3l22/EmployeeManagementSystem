@@ -7,8 +7,10 @@ namespace AI_Makers_TechAssessment.Repositories.Interfaces
         Task<bool> EmailExistsAsync(string email);
 
         Task<bool> EmailExistsForAnotherEmployee(
-    string email,
-    int employeeId
-);
+        string email,
+        int employeeId
+    );
+
+
     }
 }

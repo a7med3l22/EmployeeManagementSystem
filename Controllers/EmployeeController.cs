@@ -28,6 +28,7 @@ namespace AI_Makers_TechAssessment.Controllers
             //this is Presentation Validation not Business Validation
             if (!mobiles.Any())
             {
+                //ModelState يحتوي نتائج الـ Validation الخاصة بالـ Model ويستخدم لمعرفة إذا كانت البيانات المرسلة صالحة أم لا.
                 ModelState.AddModelError(nameof(model.MobileNumbers),
                     "At least one mobile number is required");
             }
@@ -47,14 +48,14 @@ namespace AI_Makers_TechAssessment.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.Departments = await _employeeService.GetAllDepartments();
+                ViewBag.Departments = await _employeeService.GetAllDepartments(); //Dynamic Object يستخدم لنقل البيانات من Controller إلى View.
 
-                return View(model);
+                return View(model); // للحفاظ على البيانات التي أدخلها المستخدم وإظهار أخطاء التحقق.
             }
 
             await _employeeService.AddEmployee(model);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); //لتطبيق Post-Redirect-Get Pattern ومنع إعادة إرسال النموذج عند تحديث الصفحة.
         }
 
         [HttpGet]
@@ -149,7 +150,7 @@ namespace AI_Makers_TechAssessment.Controllers
             var employees = await _employeeService.FilterEmployee(employeeName, DepartmentId);
 
             ViewBag.Departments = await _employeeService.GetAllDepartments();
-            ViewBag.SelectedName = employeeName;
+            ViewBag.SelectedName = employeeName; //للحفاظ على قيمة البحث داخل الصفحة بعد تنفيذ الفلترة.
             ViewBag.SelectedDept = DepartmentId;
             return View("Index", employees);
         }
@@ -164,8 +165,12 @@ namespace AI_Makers_TechAssessment.Controllers
         [HttpGet]
         public IActionResult Reset()
         {
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); //إعادة تحميل الصفحة بدون أي فلاتر أو شروط بحث.
         }
 
     }
 }
+
+//يمكن نقل Validation المكررة إلى Custom Validation Attribute لتقليل التكرار وتحسين الصيانة.
+
+//ViewData عبارة عن Dictionary تعتمد على string keys وتتطلب casting، بينما ViewBag عبارة عن Dynamic Wrapper فوق ViewData تسهل الوصول للبيانات بدون casting.

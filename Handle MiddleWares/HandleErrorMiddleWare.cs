@@ -32,7 +32,7 @@ namespace Full_E_Commerce_Project.Handle_MiddleWares
 
                 context.Response.Redirect("/Error?msg=" + Uri.EscapeDataString(ex.Message));
 
-                context.Response.Redirect("/Error");
+                //context.Response.Redirect("/Error");
                 return;
             }
         }
@@ -41,14 +41,13 @@ namespace Full_E_Commerce_Project.Handle_MiddleWares
 
 	private void ApplySecurityHeaders(HttpContext context)
 		{
-			// ✅ يمنع تخمين نوع الملفات (MIME sniffing)
-			context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+            //  يمنع تخمين نوع الملفات (MIME sniffing) // يعني image.jpg يقراه كده حتي لو جواه js ميقراهوش ك js
+            context.Response.Headers["X-Content-Type-Options"] = "nosniff";
 
-			// ✅ يمنع وضع موقعك في iframe (حماية من Clickjacking)
+			//  يمنع وضع موقعك في iframe (حماية من Clickjacking)
 			context.Response.Headers["X-Frame-Options"] = "DENY";
 
-            // Temporarily allowing inline scripts for development/testing purposes.
-            // In production, remove 'unsafe-inline' and move all scripts to external JS files for better security (CSP best practice).
+            // لتقليل مخاطر XSS. هجوم بيخلي حد يحط JavaScript خبيث في موقعك.
             context.Response.Headers["Content-Security-Policy"] =
    "default-src 'self'; " +
    "script-src 'self' 'unsafe-inline'; " +
@@ -56,10 +55,9 @@ namespace Full_E_Commerce_Project.Handle_MiddleWares
    "object-src 'none'; " +
    "frame-ancestors 'none'";
 
-            // ✅ سياسة الـ Referrer
             context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
 
-			// ✅ HSTS → بيجبر المتصفح يستخدم HTTPS (لو موقعك https)
+			// HSTS → بيجبر المتصفح يستخدم HTTPS (لو موقعك https)
 			context.Response.Headers["Strict-Transport-Security"] =
 				"max-age=31536000; includeSubDomains; preload";
 

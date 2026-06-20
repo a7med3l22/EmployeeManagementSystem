@@ -6,7 +6,7 @@ namespace AI_Makers_TechAssessment.Data
 {
     public class AppDbContext:DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)  //لتمرير إعدادات قاعدة البيانات مثل Connection String عن طريق Dependency Injection.
         {
             
         }

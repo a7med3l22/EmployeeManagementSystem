@@ -18,13 +18,14 @@ namespace AI_Makers_TechAssessment.Repositories
 
         }
         public async Task<bool> EmailExistsForAnotherEmployee(
-    string email,
-    int employeeId)
+        string email,
+        int employeeId)
         {
             return await dbContext.Employees
                 .AnyAsync(e =>
                     e.Email == email &&
                     e.Id != employeeId);
         }
+
     }
 }

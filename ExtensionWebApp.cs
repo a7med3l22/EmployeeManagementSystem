@@ -11,7 +11,7 @@ namespace AI_Makers_TechAssessment
         {
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            await dbContext.Database.MigrateAsync();
+            await dbContext.Database.MigrateAsync();  //تطبق جميع Migrations غير المنفذة تلقائيًا على قاعدة البيانات عند تشغيل التطبيق.
             await AddSeeding.Seeding(dbContext, app.Logger); 
 
             return app;
