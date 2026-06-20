@@ -12,7 +12,7 @@ namespace AI_Makers_TechAssessment.ViewModels
         public bool IsActive { get; set; }
 
         [Required(ErrorMessage = "Full Name is required")]
-        [StringLength(100, ErrorMessage = "Full Name cannot exceed 100 characters")]
+        [StringLength(100)]
         public string? FullName { get; set; } 
 
         [Required(ErrorMessage = "Email is required")]
@@ -23,10 +23,10 @@ namespace AI_Makers_TechAssessment.ViewModels
         public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Job Title is required")]
-        [StringLength(100, ErrorMessage = "Job Title cannot exceed 100 characters")]
+        [StringLength(100)]
         public string? JobTitle { get; set; }
 
-        public string? Photo { get; set; } // متأكد انها هتبقي موجوده لكن ممكن يحصل خطأ وتتحذف ف اخليها نلابول 
+        public string? Photo { get; set; } //نلابول لان الصورة ممكن تكون اتحذفت من السيرفر
         public string? CurrentPhoto { get; set; }
         public IFormFile? PhotoFile { get; set; }
 

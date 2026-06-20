@@ -5,8 +5,8 @@ namespace AI_Makers_TechAssessment.ViewModels
     public class EmployeeCreateVM
     {
         [Required(ErrorMessage = "Full Name is required")]
-        [StringLength(100, ErrorMessage = "Full Name cannot exceed 100 characters")]
-        public string? FullName { get; set; } //"الخاصية ممكن تكون null في أي وقت أثناء الـ binding" ف يبتدي يمسكها ويظهر الخطأ
+        [StringLength(100)]
+        public string? FullName { get; set; } // Nullable لأن الـ Model Binder ينشئ كائنًا من الـ ViewModel أولًا ثم يملأ الخصائص بالقيم التي يدخلها المستخدم، لذا قد لا تكون للخاصية قيمة ابتدائية وتكون null وقت الإنشاء.
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
@@ -16,7 +16,7 @@ namespace AI_Makers_TechAssessment.ViewModels
         public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Job Title is required")]
-        [StringLength(100, ErrorMessage = "Job Title cannot exceed 100 characters")]
+        [StringLength(100)]
         public string? JobTitle { get; set; } 
 
         public bool IsActive { get; set; }

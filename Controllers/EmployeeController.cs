@@ -19,6 +19,14 @@ namespace AI_Makers_TechAssessment.Controllers
             _employeeService = employeeService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddEmployee()
+        {
+            ViewBag.Departments = await _employeeService.GetAllDepartments();
+
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddEmployee(EmployeeCreateVM model)
         {
@@ -57,22 +65,7 @@ namespace AI_Makers_TechAssessment.Controllers
 
             return RedirectToAction(nameof(Index)); //لتطبيق Post-Redirect-Get Pattern ومنع إعادة إرسال النموذج عند تحديث الصفحة.
         }
-
-        [HttpGet]
-        public async Task<IActionResult> AddEmployee()
-        {
-            ViewBag.Departments = await _employeeService.GetAllDepartments();
-
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> RemoveEmployee(int EmployeeId)
-        {
-            await _employeeService.RemoveEmployee(EmployeeId);
-            return RedirectToAction(nameof(Index));
-        }
-
-
+   
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -141,6 +134,13 @@ namespace AI_Makers_TechAssessment.Controllers
 
             await _employeeService.UpdateEmployee(model, id);
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveEmployee(int EmployeeId)
+        {
+            await _employeeService.RemoveEmployee(EmployeeId);
             return RedirectToAction(nameof(Index));
         }
 
