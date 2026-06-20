@@ -1,6 +1,6 @@
 using Full_E_Commerce_Project.Handle_MiddleWares;
 
-namespace AI_Makers_TechAssessment
+namespace AI_Makers_TechAssessment //ok
 {
     public class Program
     {
@@ -28,19 +28,19 @@ namespace AI_Makers_TechAssessment
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseHsts(); //بيجبر المتصفح يستخدم HTTPS فقط مع الموقع وبيمنع الرجوع لـ HTTP.
             }
 
             app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseMiddleware<HandleErrorMiddleWare>();
+            app.UseRouting(); //المسؤول عن معرفة Controller و Action المطلوبة.
+            app.UseMiddleware<HandleErrorMiddleWare>(); //يحقق Centralized Error Handling ويمنع تكرار الكود ويسهل صيانة التطبيق.
             app.UseAuthorization();
 
             app.MapStaticAssets();
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //السماح بخدمة الملفات الثابتة مثل الصور و CSS و JavaScript مباشرة من wwwroot.
             app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Employee}/{action=Index}/{id?}")
+        pattern: "{controller=Employee}/{action=}/{id?}")
         .WithStaticAssets();
 
             await app.MyOwnApp();

@@ -29,7 +29,7 @@ namespace AI_Makers_TechAssessment.Repositories
         }
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            return await dbContext.Set<T>().AsNoTracking().ToListAsync();
+            return await dbContext.Set<T>().AsNoTracking().ToListAsync();//IReadOnlyList//لمنع تعديل البيانات المرجعة من خارج Repository وإظهار أن النتيجة للقراءة فقط.
 
         }
 

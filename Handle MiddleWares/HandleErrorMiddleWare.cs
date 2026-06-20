@@ -11,9 +11,7 @@ namespace Full_E_Commerce_Project.Handle_MiddleWares
 		private readonly IWebHostEnvironment environment;
 		private readonly IMemoryCache memoryCache;
 		private readonly TimeSpan _rateLimitWindow = TimeSpan.FromSeconds(30);
-		private static readonly ConcurrentDictionary<string, SemaphoreSlim> _locks
-		= new ConcurrentDictionary<string, SemaphoreSlim>();
-
+	
 		public HandleErrorMiddleWare(IWebHostEnvironment environment, IMemoryCache memoryCache)
 		{
 			this.environment = environment;

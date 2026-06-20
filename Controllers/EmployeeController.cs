@@ -29,7 +29,7 @@ namespace AI_Makers_TechAssessment.Controllers
             var mobiles = model.MobileNumbers?
         .Where(m => !string.IsNullOrWhiteSpace(m))
         .ToList() ?? new();
-
+            //this is Presentation Validation not Business Validation
             if (!mobiles.Any())
             {
                 ModelState.AddModelError(nameof(model.MobileNumbers),
